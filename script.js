@@ -26,5 +26,16 @@ function populateItems(items=[], itemList){
     }).join('');
 }
 
+function eventToggle(e){
+    if(!e.target.matches('input')) return;
+    const element = e.target;
+    const index = element.dataset.index;
+    items[index].done = !items[index].done;
+    localStorage.setItem('items',JSON.stringify(items));
+    populateItems(items,itemsList);
+}
+
 addItems.addEventListener('submit',addItem);
+itemsList.addEventListener('click',eventToggle);
+
 populateItems(items,itemsList);
